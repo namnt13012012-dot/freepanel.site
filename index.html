@@ -3,198 +3,377 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecureFlow — Tải & Quản Lý Khóa</title>
+    <title>CosmicKey — Hệ Thống Khóa Vũ Trụ</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        :root {
-            --bg: #020617;
-            --surface: #111827;
-            --card: #1f2937;
-            --accent: #facc15;
-            --accent-2: #22c55e;
-            --text: #f8fafc;
-            --muted: #94a3b8;
-            --border: rgba(250, 204, 21, 0.15);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
         }
+
         body {
-            background: var(--bg);
-            color: var(--text);
             min-height: 100vh;
-            background-image:
-                radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(250, 204, 21, 0.08) 0%, transparent 40%);
+            background: linear-gradient(135deg, #020617 0%, #0c1233 40%, #1a1040 70%, #081535 100%);
+            overflow-x: hidden;
+            color: #e6f0ff;
         }
-        /* ====== HEADER — Bố cục khác hẳn ====== */
+
+        /* ===== Nền Sao Chuyển Động ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            animation: twinkle var(--dur) ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: var(--op); transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.3); }
+        }
+        .nebula {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .nebula-1 {
+            top: -200px;
+            right: -100px;
+            background: radial-gradient(circle, #6366f1, transparent 70%);
+            animation: float1 20s ease-in-out infinite;
+        }
+        .nebula-2 {
+            bottom: -150px;
+            left: -100px;
+            background: radial-gradient(circle, #ec4899, transparent 70%);
+            animation: float2 25s ease-in-out infinite;
+        }
+        .nebula-3 {
+            top: 40%;
+            left: 30%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #10b981, transparent 70%);
+            animation: float3 30s ease-in-out infinite;
+        }
+        @keyframes float1 {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(-40px, 60px); }
+        }
+        @keyframes float2 {
+            0%,100% { transform: translate(0,0); }
+            50% { transform: translate(50px, -40px); }
+        }
+        @keyframes float3 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.15); }
+        }
+
+        /* ===== Container ===== */
+        .page-wrap {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Header ===== */
         header {
-            padding: 30px 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .header-inner {
-            max-width: 1140px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 28px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid rgba(148, 163, 255, 0.12);
+            backdrop-filter: blur(10px);
         }
-        .logo-wrap {
+        .logo {
             display: flex;
             align-items: center;
             gap: 14px;
         }
-        .logo-mark {
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
-            display: grid; place-items: center;
-            font-size: 22px;
-            color: #000;
-            font-weight: bold;
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
+            display: grid;
+            place-items: center;
+            font-size: 24px;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.45), 0 0 50px rgba(236, 72, 153, 0.2);
+            animation: glow 3s ease-in-out infinite alternate;
         }
-        .logo-text h2 { font-size: 18px; letter-spacing: 1px; }
-        .logo-text p { font-size: 11px; color: var(--muted); }
-        /* Menu dọc trên desktop, gọn trên mobile — khác hẳn */
-        .nav-wrap { display: flex; gap: 12px; align-items: center; }
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(236, 72, 153, 0.15); }
+            to { box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(236, 72, 153, 0.3); }
+        }
+        .logo-text h2 {
+            font-size: 20px;
+            background: linear-gradient(90deg, #a5b4fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+        .logo-text p {
+            font-size: 11px;
+            color: #94a3b8;
+            letter-spacing: 2px;
+        }
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
         .nav-link {
             padding: 10px 20px;
-            border-radius: 999px;
+            border-radius: 12px;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
             transition: all 0.3s ease;
         }
         .nav-normal {
-            color: var(--muted);
+            color: #c7d2fe;
             border: 1px solid transparent;
+            background: rgba(99, 102, 241, 0.05);
         }
         .nav-normal:hover {
-            border-color: var(--border);
-            color: var(--accent);
-            background: rgba(250, 204, 21, 0.04);
+            border-color: rgba(99, 102, 241, 0.4);
+            background: rgba(99, 102, 241, 0.12);
+            color: #e0e7ff;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
         }
         .nav-admin {
-            background: var(--accent);
-            color: #000;
+            background: linear-gradient(135deg, #ec4899, #f59e0b);
+            color: white;
             font-weight: 600;
-            box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
         }
-        .nav-admin:hover { transform: scale(1.05); }
+        .nav-admin:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.4), 0 0 60px rgba(245, 158, 11, 0.2);
+        }
 
-        /* ====== MAIN — Bố cục khối lớn, khác cấu trúc ====== */
+        /* ===== Main Hero ===== */
         main {
-            max-width: 1140px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 70px 24px;
         }
         .hero {
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 50px;
             align-items: center;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 868px) {
             .hero { grid-template-columns: 1fr; text-align: center; }
         }
         .hero-content h1 {
-            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
             line-height: 1.2;
             margin-bottom: 24px;
         }
-        .hero-content h1 span {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        .hero-content h1 span:nth-child(1) {
+            background: linear-gradient(90deg, #a5b4fc, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .hero-content p {
-            color: var(--muted);
-            font-size: 16px;
+        .hero-content h1 span:nth-child(2) {
+            background: linear-gradient(90deg, #f472b6, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-desc {
+            font-size: 17px;
+            color: #a5b4fc;
             line-height: 1.8;
-            margin-bottom: 32px;
+            margin-bottom: 36px;
         }
         .hero-buttons {
-            display: flex; gap: 14px; flex-wrap: wrap;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
         .btn-primary {
-            padding: 14px 32px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: #000;
-            border-radius: 12px;
+            padding: 15px 36px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            color: white;
+            border-radius: 14px;
             font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.25);
-            transition: transform 0.2s;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.35), 0 0 50px rgba(236, 72, 153, 0.15);
+            transition: all 0.3s ease;
         }
-        .btn-primary:hover { transform: translateY(-3px); }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px rgba(99, 102, 241, 0.45), 0 0 70px rgba(236, 72, 153, 0.25);
+        }
         .btn-secondary {
-            padding: 14px 32px;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: var(--text);
-            border-radius: 12px;
+            padding: 15px 36px;
+            border: 1px solid rgba(167, 139, 250, 0.4);
+            color: #c4b5fd;
+            border-radius: 14px;
             text-decoration: none;
-            transition: all 0.2s;
+            background: rgba(167, 139, 250, 0.04);
+            transition: all 0.3s ease;
         }
-        .btn-secondary:hover { border-color: var(--accent); }
+        .btn-secondary:hover {
+            border-color: #a78bfa;
+            background: rgba(167, 139, 250, 0.1);
+            color: #e5deff;
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.15);
+        }
 
-        /* Khối bên phải */
-        .hero-card {
-            background: var(--surface);
+        /* ===== Feature Card ===== */
+        .card-glow {
+            background: rgba(15, 23, 42, 0.7);
             border-radius: 20px;
-            padding: 32px;
-            border: 1px solid var(--border);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            padding: 36px;
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1), inset 0 0 40px rgba(99, 102, 241, 0.05);
         }
-        .hero-card h3 { font-size: 16px; margin-bottom: 20px; color: var(--accent); }
-        .feature-list { list-style: none; }
-        .feature-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            display: flex; gap: 10px; align-items: center;
+        .card-title {
+            font-size: 18px;
+            margin-bottom: 24px;
+            color: #a5b4fc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .feature-list li:last-child { border-bottom: none; }
-        .feature-list li span:first-child { font-size: 18px; }
-        .feature-list li span:last-child { color: var(--muted); font-size: 14px; }
+        .feat-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(100, 116, 139, 0.15);
+        }
+        .feat-item:last-child { border-bottom: none; }
+        .feat-icon {
+            font-size: 20px;
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+        .feat-text strong {
+            display: block;
+            font-size: 14px;
+            color: #e0e7ff;
+            margin-bottom: 2px;
+        }
+        .feat-text span {
+            font-size: 12px;
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-inner">
-            <div class="logo-wrap">
-                <div class="logo-mark">⚡</div>
-                <div class="logo-text">
-                    <h2>SecureFlow</h2>
-                    <p>FAST • SECURE • RELIABLE</p>
-                </div>
-            </div>
-            <nav class="nav-wrap">
-                <a href="#" class="nav-normal">📂 Tệp Dữ Liệu</a>
-                <a href="#" class="nav-normal">🔑 Lấy Mã Khóa</a>
-                <a href="#" class="nav-normal">🔗 Liên Kết</a>
-                <a href="#" class="nav-normal">🛡️ An Ninh</a>
-                <a href="admin.html" class="nav-admin">Bảng Quản Trị</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Nền Sao & Thiên Hà -->
+    <div class="stars" id="starsContainer"></div>
+    <div class="nebula nebula-1"></div>
+    <div class="nebula nebula-2"></div>
+    <div class="nebula nebula-3"></div>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Tải Tài Nguyên &<br>Nhận <span>Khóa Bảo Mật</span></h1>
-                <p>Không rút gọn link, không chờ đợi. Tải trực tiếp mọi tệp, script, công cụ. Khi cần mã kích hoạt — hệ thống tạo key an toàn, chống mọi công cụ bỏ qua xác thực.</p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn-primary">Tải Ngay</a>
-                    <a href="admin.html" class="btn-secondary">Vào Quản Trị</a>
+    <div class="page-wrap">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">🌌</div>
+                <div class="logo-text">
+                    <h2>CosmicKey</h2>
+                    <p>INFINITE • SECURE • COSMIC</p>
                 </div>
             </div>
-            <div class="hero-card">
-                <h3>✅ Điểm Nổi Bật</h3>
-                <ul class="feature-list">
-                    <li><span>🚀</span><span>Tốc độ cao — không giới hạn băng thông</span></li>
-                    <li><span>🔐</span><span>Mã hóa HMAC-SHA256 chống giả mạo</span></li>
-                    <li><span>⏰</span><span>Tự động khóa khi hết thời hạn</span></li>
-                    <li><span>📊</span><span>Theo dõi lượt sử dụng chi tiết</span></li>
-                    <li><span>🛡️</span><span>Chống bot & tool bypass tự động</span></li>
-                </ul>
-            </div>
-        </section>
-    </main>
+            <nav>
+                <a href="#" class="nav-link nav-normal">📂 Kho Tài Nguyên</a>
+                <a href="#" class="nav-link nav-normal">🔑 Nhận Khóa</a>
+                <a href="#" class="nav-link nav-normal">🔗 Liên Kết An Toàn</a>
+                <a href="#" class="nav-link nav-normal">🛡️ Hệ Thống Bảo Vệ</a>
+                <a href="admin.html" class="nav-link nav-admin">✨ Bảng Quản Trị</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>
+                        <span>Tải Tài Nguyên Vũ Trụ</span><br>
+                        <span>& Khóa Kích Hoạt</span>
+                    </h1>
+                    <p class="hero-desc">
+                        Truy cập trực tiếp không giới hạn — không rút gọn link, không chờ đợi. Hệ thống khóa được mã hóa đa lớp với công nghệ bảo mật cấp thiên hà, chống mọi dạng bỏ qua xác thực.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn-primary">🚀 Khám Phá Ngay</a>
+                        <a href="admin.html" class="btn-secondary">⚙️ Bảng Điều Khiển</a>
+                    </div>
+                </div>
+                <div class="card-glow">
+                    <h3 class="card-title">✨ Năng Lượng Vũ Trụ</h3>
+                    <div class="feat-item">
+                        <span class="feat-icon">⚡</span>
+                        <div class="feat-text">
+                            <strong>Tốc Độ Ánh Sáng</strong>
+                            <span>Không giới hạn băng thông, tải ngay lập tức</span>
+                        </div>
+                    </div>
+                    <div class="feat-item">
+                        <span class="feat-icon">🔐</span>
+                        <div class="feat-text">
+                            <strong>Mã Hóa Đa Chiều</strong>
+                            <span>HMAC-SHA256 + chữ ký thời gian thực</span>
+                        </div>
+                    </div>
+                    <div class="feat-item">
+                        <span class="feat-icon">🌙</span>
+                        <div class="feat-text">
+                            <strong>Tự Động Hết Hạn</strong>
+                            <span>Khóa tự động vô hiệu theo lịch trình</span>
+                        </div>
+                    </div>
+                    <div class="feat-item">
+                        <span class="feat-icon">🌟</span>
+                        <div class="feat-text">
+                            <strong>Theo Dõi Thời Gian Thực</strong>
+                            <span>Giám sát từng lượt truy cập chi tiết</span>
+                        </div>
+                    </div>
+                    <div class="feat-item">
+                        <span class="feat-icon">🛡️</span>
+                        <div class="feat-text">
+                            <strong>Chống Xâm Nhập</strong>
+                            <span>Phát hiện & chặn tool bypass tự động</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Tạo sao động -->
+    <script>
+        const container = document.getElementById('starsContainer');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2.5 + 0.5;
+            star.style.width = star.style.height = size + 'px';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.setProperty('--op', Math.random() * 0.5 + 0.2);
+            star.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
+            container.appendChild(star);
+        }
+    </script>
 </body>
 </html>
