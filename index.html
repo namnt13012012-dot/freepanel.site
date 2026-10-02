@@ -17,6 +17,110 @@
             background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
             overflow-x: hidden;
             color: #e0e7ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ===== Nền Sao & Mây Thiên Hà ===== */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100% ;
+            height: 100%;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            border-radius: 50%;
+            background: white;
+            animation: twinkle var(--dur) ease-in-out infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: var(--op); }
+            50% { opacity: 1; }
+        }
+        .nebula {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.22;
+            pointer-events: none;
+        }
+        .nebula-1 {
+            top: -150px;
+            right: -80px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #8b5cf6, transparent 70%);
+            animation: float1 25s ease-in-out infinite;
+        }
+        .nebula-2 {
+            bottom: -120px;
+            left: -60px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #ec4899, transparent 70%);
+            animation: float2 30s ease-in-out infinite;
+            }
+        }
+        @keyframes float1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-50px, 70px); }
+        }
+        @keyframes float2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(60px, -50px); }
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        /* ===== Header ===== */
+        header {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(129, 140, 248, 0.15);
+            backdrop-filter: blur(10px);
+        }
+        .logo {
+            display: flex;
+            align-items:<[SILENT_never_used_51bce0c785ca2f68081bfa7d91973934]>
+</think_never_used_51bce0c785ca2f68081bfa7d91973934>
+Được rồi! ✅ Tôi sẽ bỏ hoàn toàn phần **Bảng Điều Khiển** khỏi trang, chỉ giữ lại **Tải Panel & Khóa Kích Hoạt** và các phần liên quan.
+
+Dưới đây là code `index.html` đã cập nhật, bạn chỉ cần ghi đè lên file cũ là được:
+
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Panel — Tải Panel & Khóa Kích Hoạt</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+            overflow-x: hidden;
+            color: #e0e7ff;
         }
 
         /* ===== Nền Sao & Mây Thiên Hà ===== */
@@ -143,7 +247,7 @@
         }
         .hero {
             display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
+            grid-template-columns: 1fr 1fr;
             gap: 50px;
             align-items: center;
         }
@@ -216,7 +320,7 @@
             padding: 36px;
             border: 1px solid rgba(129, 140, 248, 0.2);
             backdrop-filter: blur(15px);
-            box-shadow: 0 0 50px rgba(99, 102, 241, 0.1), inset 0 0 50px rgba(99, 102, 241, 0.05);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.1), inset 0 0 50px rgba(99, 102, 248, 0.05);
         }
         .card-title {
             font-size: 18px;
@@ -240,11 +344,14 @@
             font-size: 20px;
             filter: drop-shadow(0 0 4px currentColor);
         }
+        .feat-text {
+            flex-direction: column;
+            display: flex;
+            gap: 2px;
+        }
         .feat-text strong {
-            display: block;
             font-size: 14px;
             color: #e0e7ff;
-            margin-bottom: 2px;
         }
         .feat-text span {
             font-size: 12px;
@@ -261,17 +368,16 @@
     <div class="page">
         <header>
             <div class="logo">
-                <div class="logo-icon">🌌</div>
+                <div class="logo-icon">🌌</td>
                 <div class="logo-text">
                     <h3>Cosmic Panel</h3>
                     <p>INFINITE • SECURE • COSMIC</p>
                 </div>
             </div>
             <nav>
-                <a href="#" class="nav-link">📂 Kho Tài Nguyên</a>
-                <a href="#" class="nav-link">🔑 Nhận Khóa</a>
-                <a href="#" class="nav-link">🔗 Liên Kết An Toàn</a>
-                <a href="#" class="nav-link">🛡️ Hệ Thống Bảo Vệ</a>
+                <a href="#" class="nav-link">📂 Kho Tài Nguyên</td>
+                <a href="#" class="nav-link">🔑 Nhận Khóa</td>
+                <a href="#" class="nav-link">🔗 Liên Kết An Toàn</td                <a href="#" class="nav-link">🛡️ Hệ Thống Bảo Vệ</a>
             </nav>
         </header>
 
@@ -287,8 +393,8 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="#" class="btn-primary">🚀 Khám Phá Ngay</a>
-                        <a href="admin.html" class="btn-secondary">⚙️ Bảng Điều Khiển</a>
-                    </div>
+                        <a href="#" class="btn-secondary">⚙️ Bảng Điều Khiển</a>
+                        </div>
                 </div>
                 <div class="card-glow">
                     <h3 class="card-title">✨ Năng Lượng Vũ Trụ</h3>
@@ -296,30 +402,28 @@
                         <span class="feat-icon">⚡</span>
                         <div class="feat-text">
                             <strong>Tốc Độ Ánh Sáng</strong>
-                            <span>Không giới hạn băng thông, tải ngay lập tức</span>
+                            <span> Khóa Kích Hoạt nhanh chóng, dễ sử dụng</span>
                         </div>
                     </div>
                     <div class="feat-item">
                         <span class="feat-icon">🔐</span>
                         <div class="feat-text">
-                            <strong>Mã Hóa Đa Chiều</strong>
-                            <span>HMAC-SHA256 + chữ ký thời gian thực</span>
+                            <strong>Bảo Mật Tối Ưu</strong>
+                            <span>Panel được mã hóa an toàn, chống truy cập trái phép</span>
                         </div>
                     </div>
                     <div class="feat-item">
                         <span class="feat-icon">🌙</span>
                         <div class="feat-text">
-                            <strong>Tự Động Hết Hạn</strong>
-                            <span>Khóa tự động vô hiệu theo lịch trình</span>
+                            <strong>Ổn Định & Hiệu Quả</strong>
+                            <span>Hoạt động mượt mà, không bị gián đoạn</span>
                         </div>
                     </div>
                     <div class="feat-item">
                         <span class="feat-icon">🌟</span>
                         <div class="feat-text">
-                            <strong>Theo Dõi Thời Gian Thực</strong>
-                            <div class="feat-text">
-                            <strong>Theo Dõi Thời Gian Thực</strong>
-                            <span>Giám sát từng lượt truy cập chi tiết</span>
+                            <strong>Hỗ Trợ Nhanh</strong>
+                            <span>Luôn sẵn sàng hỗ trợ khi bạn cần</span>
                         </div>
                     </div>
                     <div class="feat-item">
