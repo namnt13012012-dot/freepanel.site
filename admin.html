@@ -3,462 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản Trị — CosmicKey</title>
+    <title>Quản Trị — Tạo Khóa Kích Hoạt</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Roboto', sans-serif;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', sans-serif; }
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
             overflow-x: hidden;
             color: #e0e7ff;
         }
-
-        /* ===== Nền Sao & Mây Thiên Hà ===== */
         .stars {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
         }
         .star {
-            position: absolute;
-            border-radius: 50%;
-            background: white;
+            position: absolute; border-radius: 50%; background: white;
             animation: twinkle var(--dur) ease-in-out infinite;
         }
         @keyframes twinkle {
-            0%, 100% { opacity: var(--op); }
+            0%,100% { opacity: var(--op); }
             50% { opacity: 1; }
         }
-        .nebula {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(120px);
-            opacity: 0.2;
-            pointer-events: none;
-        }
-        .neb-a {
-            top: -100px; right: -50px;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, #8b5cf6, transparent 70%);
-            animation: drift 25s ease-in-out infinite;
-        }
-        .neb-b {
-            bottom: -100px; left: -50px;
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, #ec4899, transparent 70%);
-            animation: drift2 30s ease-in-out infinite;
-        }
-        @keyframes drift {
-            0%,100% { transform: translate(0,0); }
-            50% { transform: translate(-30px, 40px); }
-        }
-        @keyframes drift2 {
-            0%,100% { transform: translate(0,0); }
-            50% { transform: translate(40px, -30px); }
-        }
-
         .page { position: relative; z-index: 1; }
-
-        /* ===== Header ===== */
         header {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 24px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(129, 140, 248, 0.15);
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .logo-icon {
-            width: 42px; height: 42px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899);
-            display: grid; place-items: center;
-            font-size: 20px;
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
-        }
-        .logo-text h3 {
-            font-size: 16px;
-            background: linear-gradient(90deg, #a5b4fc, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .logo-text p {
-            font-size: 10px;
-            color: #94a3b8;
+            max-width: 800px; margin: 0 auto; padding: 24px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(129,140,248,0.15);
         }
         .back-link {
-            padding: 10px 22px;
-            border: 1px solid rgba(129, 140, 248, 0.25);
-            color: #c7d2fe;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 14px;
-            transition: all 0.3s ease;
+            color: #a5b4fc; text-decoration: none; font-size: 14px;
+            transition: color 0.2s;
         }
-        .back-link:hover {
-            border-color: #818cf8;
-            background: rgba(129, 140, 248, 0.1);
-            box-shadow: 0 0 15px rgba(129, 140, 248, 0.15);
-        }
-
-        /* ===== Khối Chung ===== */
-        main {
-            max-width: 720px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-        .panel {
-            background: rgba(15, 23, 42, 0.75);
-            border-radius: 24px;
-            padding: 42px;
-            border: 1px solid rgba(129, 140, 248, 0.2);
+        .back-link:hover { color: #e0e7ff; }
+        main { max-width: 800px; margin: 0 auto; padding: 40px 24px; }
+        .card {
+            background: rgba(15,23,42,0.75); border-radius: 20px; padding: 36px;
+            border: 1px solid rgba(129,140,248,0.2);
             backdrop-filter: blur(15px);
-            box-shadow: 
-                0 0 50px rgba(99, 102, 241, 0.1),
-                inset 0 1px 0 rgba(255,255,255,0.05);
+            box-shadow: 0 0 50px rgba(99,102,241,0.1);
         }
-        .panel-header {
-            margin-bottom: 32px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(129, 140, 248, 0.15);
+        .card h2 {
+            font-size: 22px; margin-bottom: 28px;
+            background: linear-gradient(90deg, #a5b4fc, #f472b6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .panel-header h1 {
-            font-size: 22px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .panel-header h1 span {
-            background: linear-gradient(90deg, #a78bfa, #f472b6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .panel-header p {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-top: 6px;
-        }
-
-        /* ===== Form Đăng Nhập ===== */
-        .auth-panel {
-            max-width: 420px;
-            margin: 80px auto;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 24px; }
         label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
+            display: block; margin-bottom: 8px; font-size: 14px;
             color: #c7d2fe;
         }
-        input {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(129, 140, 248, 0.2);
-            border-radius: 10px;
-            color: #e0e7ff;
-            font-size: 15px;
-            outline: none;
+        input, select {
+            width: 100%; padding: 12px 16px; border-radius: 10px;
+            border: 1px solid rgba(129,140,248,0.25);
+            background: rgba(17,24,39,0.6); color: #e0e7ff;
+            font-size: 14px; outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus { border-color: #8b5cf6; }
+        .btn-generate {
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            color: white; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: 600; cursor: pointer;
             transition: all 0.3s ease;
         }
-        input:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15), 0 0 15px rgba(129, 140, 248, 0.1);
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #8b5cf6, #ec4899, #f59e0b);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 25px rgba(139, 92, 246, 0.3);
-        }
-        .submit-btn:hover {
+        .btn-generate:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.4), 0 0 60px rgba(236, 72, 153, 0.2);
+            box-shadow: 0 8px 30px rgba(99,102,241,0.35);
         }
-        .error-msg {
-            color: #f87171;
-            margin-top: 14px;
-            font-size: 14px;
-            display: none;
+        .result {
+            margin-top: 28px; padding: 20px;
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 12px; display: none;
         }
-
-        /* ===== Form Tạo Khóa ===== */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        @media (max-width: 560px) {
-            .form-row { grid-template-columns: 1fr; }
-        }
-        select {
-            width: 100%;
-            padding: 14px 18px;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(129, 140, 248, 0.2);
-            border-radius: 10px;
-            color: #e0e7ff;
-            font-size: 15px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        select:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.15);
-        }
-        .result-box {
-            margin-top: 30px;
-            padding: 24px;
-            background: rgba(16, 185, 129, 0.08);
-            border: 1px solid rgba(52, 211, 153, 0.25);
-            border-radius: 14px;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        .result-box.show { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .result-box h4 {
-            color: #6ee7b7;
-            margin-bottom: 12px;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .result.show { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .key-display {
-            background: rgba(0,0,0,0.3);
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-family: 'Consolas', monospace;
-            font-size: 16px;
-            color: #a7f3d0;
-            word-break: break-all;
-            margin-bottom: 12px;
-            border: 1px solid rgba(74, 222, 128, 0.15);
+            margin-top: 12px; padding: 14px;
+            background: rgba(0,0,0,0.3); border-radius: 8px;
+            font-family: 'Consolas', monospace; font-size: 15px;
+            color: #34d399; word-break: break-all;
+            display: flex; justify-content: space-between; align-items: center; gap: 12px;
         }
         .copy-btn {
-            padding: 10px 24px;
-            background: rgba(255,255,255,0.08);
-            color: #c7d2fe;
-            border: 1px solid rgba(199, 210, 254, 0.2);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.2s;
+            padding: 6px 12px; background: rgba(139,92,246,0.3);
+            border: none; border-radius: 6px; color: white;
+            cursor: pointer; font-size: 12px; flex-shrink: 0;
         }
-        .copy-btn:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: #c7d2fe;
+        .copy-btn:hover { background: rgba(139,92,246,0.5); }
+        .history { margin-top: 32px; }
+        .history h3 {
+            font-size: 16px; margin-bottom: 16px; color: #a5b4fc;
         }
-        .hidden { display: none !important; }
-        .logout-btn {
-            margin-top: 20px;
-            padding: 10px 24px;
-            background: rgba(239, 68, 68, 0.15);
-            color: #fca5a5;
-            border: 1px solid rgba(239, 68, 68, 0.25);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
+        .history-item {
+            padding: 12px; border-bottom: 1px solid rgba(100,116,139,0.15);
+            font-size: 13px;
         }
-        .logout-btn:hover {
-            background: rgba(239, 68, 68, 0.25);
-        }
+        .history-item:last-child { border-bottom: none; }
+        .history-key { color: #34d399; font-family: monospace; }
+        .history-meta { color: #94a3b8; margin-top: 4px; font-size: 11px; }
     </style>
 </head>
 <body>
     <div class="stars" id="starsContainer"></div>
-    <div class="nebula neb-a"></div>
-    <div class="nebula neb-b"></div>
 
     <div class="page">
-        <!-- ===== Màn Hình Đăng Nhập ===== -->
-        <div id="loginSection">
-            <main class="auth-panel">
-                <div class="panel">
-                    <div class="panel-header" style="text-align:center;">
-                        <div style="display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:10px;">
-                            <div class="logo-icon">✨</div>
-                            <div>
-                                <h3 style="font-size:20px;background:linear-gradient(90deg,#a5b4fc,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">CosmicKey</h3>
-                                <p style="font-size:12px;color:#94a3b8;">Bảng Điều Khiển Vũ Trụ — Đăng Nhập</p>
-                            </div>
-                        </div>
-                    </div>
+        <header>
+            <h2>⚙️ Quản Trị — Tạo Khóa</h2>
+            <a href="index.html" class="back-link">← Trở Về Trang Chủ</a>
+        </header>
 
-                    <form id="loginForm">
-                        <div class="form-group">
-                            <label>Tên Người Dùng</label>
-                            <input type="text" id="username" placeholder="Nhập tên tài khoản" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Mật Khẩu</label>
-                            <input type="password" id="password" placeholder="Nhập mật khẩu" required>
-                        </div>
-                        <button type="submit" class="submit-btn">🔐 Đăng Nhập Hệ Thống</button>
-                        <div class="error-msg" id="loginError">Tên đăng nhập hoặc mật khẩu không đúng!</div>
-                    </form>
+        <main>
+            <div class="card">
+                <h2>🔑 Tạo Khóa Kích Hoạt Mới</h2>
+
+                <div class="form-group">
+                    <label for="duration">Thời hạn hiệu lực</label>
+                    <select id="duration">
+                        <option value="1h">1 Giờ</option>
+                        <option value="6h">6 Giờ</option>
+                        <option value="1d" selected>1 Ngày</option>
+                        <option value="7d">7 Ngày</option>
+                        <option value="30d">30 Ngày</option>
+                        <option value="forever">Vĩnh Viễn</option>
+                    </select>
                 </div>
-            </main>
-        </div>
 
-        <!-- ===== Màn Hình Quản Trị (Sau Đăng Nhập) ===== -->
-        <div id="adminSection" class="hidden">
-            <header>
-                <div class="logo">
-                    <div class="logo-icon">🌌</div>
-                    <div>
-                        <h3>CosmicKey</h3>
-                        <p>Bảng Điều Khiển Vũ Trụ</p>
-                    </div>
+                <div class="form-group">
+                    <label for="quota">Giới hạn lượt sử dụng</label>
+                    <select id="quota">
+                        <option value="1">1 Lần</option>
+                        <option value="5">5 Lần</option>
+                        <option value="10" selected>10 Lần</option>
+                        <option value="100">100 Lần</option>
+                        <option value="unlimited">Không giới hạn</option>
+                    </select>
                 </div>
-                <div style="display:flex;gap:12px;align-items:center;">
-                    <a href="index.html" class="back-link">← Trở Về Trang Chủ</a>
-                    <button class="logout-btn" onclick="logout()">🚪 Đăng Xuất</button>
-                </div>
-            </header>
 
-            <main>
-                <div class="panel">
-                    <div class="panel-header">
-                        <h1><span>🌌</span> Tạo Khóa Truy Cập Mới</h1>
-                        <p>Thiết lập thông số → tạo khóa → phân phối cho người dùng</p>
-                    </div>
+                <button class="btn-generate" onclick="generateKey()">✨ Tạo Khóa Ngay</button>
 
-                    <form id="keyForm">
-                        <div class="form-group">
-                            <label>Tên / Ghi Chú Nhận Diện</label>
-                            <input type="text" id="desc" placeholder="VD: Key Mod Game — Thành viên Alpha" required>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label>Ngày Hết Hạn</label>
-                                <input type="date" id="expDate">
-                            </div>
-                            <div class="form-group">
-                                <label>Giới Hạn Sử Dụng</label>
-                                <input type="number" id="maxUse" placeholder="Không giới hạn" min="1">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Cấp Quyền Truy Cập</label>
-                            <select id="level">
-                                <option value="basic">⭐ Cơ Bản — Tải tệp & lấy khóa</option>
-                                <option value="premium">🌟 Nâng Cao — Tất cả chức năng</option>
-                                <option value="galaxy">🌌 Vũ Trụ — Toàn quyền hệ thống</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="submit-btn">🚀 Tạo Khóa Ngay</button>
-                    </form>
-
-                    <div class="result-box" id="resultBlock">
-                        <h4>✅ Khóa đã được tạo trong vũ trụ!</h4>
-                        <div class="key-display" id="keyOutput">CK-XXXX-XXXX-XXXX</div>
-                        <button class="copy-btn" onclick="copyKey()">📋 Sao Chép Khóa</button>
+                <div class="result" id="resultBox">
+                    <strong>✅ Khóa đã tạo thành công!</strong>
+                    <div class="key-display" id="keyDisplay">
+                        <span id="keyText"></span>
+                        <button class="copy-btn" onclick="copyKey()">Sao Chép</button>
                     </div>
                 </div>
-            </main>
-        </div>
+
+                <div class="history" id="historySection" style="display:none;">
+                    <h3>📋 Khóa Đã Tạo</h3>
+                    <div id="historyList"></div>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Tạo sao động -->
     <script>
+        // Tạo hiệu ứng sao
         const container = document.getElementById('starsContainer');
-        for (let i = 0; i < 180; i++) {
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const s = Math.random() * 2 + 0.6;
+            const s = Math.random() * 2.5 + 0.5;
             star.style.width = star.style.height = s + 'px';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
-            star.style.setProperty('--op', Math.random() * 0.4 + 0.15);
-            star.style.setProperty('--dur', (Math.random() * 4 + 2) + 's');
+            star.style.setProperty('--op', Math.random() * 0.5 + 0.2);
+            star.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
             container.appendChild(star);
         }
 
-        // ===== Xác Thực Đăng Nhập =====
-        const VALID_USER = 'admin';
-        const VALID_PASS = 'nguyenthanhnam@1301';
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('username').value.trim();
-            const pass = document.getElementById('password').value.trim();
-
-            if (user === VALID_USER && pass === VALID_PASS) {
-                // Đăng nhập thành công
-                document.getElementById('loginSection').classList.add('hidden');
-                document.getElementById('adminSection').classList.remove('hidden');
-                document.getElementById('loginError').style.display = 'none';
-            } else {
-                // Sai thông tin
-                document.getElementById('loginError').style.display = 'block';
+        // Tạo khóa ngẫu nhiên
+        function generateRandomString(len) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let res = '';
+            for (let i = 0; i < len; i++) {
+                res += chars.charAt(Math.floor(Math.random() * chars.length));
             }
-        });
-
-        // Đăng xuất
-        function logout() {
-            document.getElementById('adminSection').classList.add('hidden');
-            document.getElementById('loginSection').classList.remove('hidden');
-            document.getElementById('username').value = '';
-            document.getElementById('password').value = '';
-            document.getElementById('loginError').style.display = 'none';
+            return res;
         }
 
-        // Tạo khóa
-        function generateCosmicKey() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789';
-            let part = () => {
-                let s = '';
-                for (let i = 0; i < 4; i++) s += chars[Math.floor(Math.random() * chars.length)];
-                return s;
-            };
-            return `CK-${part()}-${part()}-${part()}`;
+        // Lấy thời gian hết hạn
+        function getExpiryTime(duration) {
+            const now = new Date();
+            switch(duration) {
+                case '1h': return new Date(now.getTime() + 60*60*1000);
+                case '6h': return new Date(now.getTime() + 6*60*60*1000);
+                case '1d': return new Date(now.getTime() + 24*60*60*1000);
+                case '7d': return new Date(now.getTime() + 7*24*60*60*1000);
+                case '30d': return new Date(now.getTime() + 30*24*60*60*1000);
+                case 'forever': return null;
+            }
         }
 
-        document.getElementById('keyForm').addEventListener('submit', e => {
-            e.preventDefault();
-            document.getElementById('keyOutput').textContent = generateCosmicKey();
-            document.getElementById('resultBlock').classList.add('show');
-        });
+        // Tạo khóa chính
+        function generateKey() {
+            const duration = document.getElementById('duration').value;
+            const quota = document.getElementById('quota').value;
+            const keyPart = generateRandomString(24);
+            const timestamp = Date.now().toString(36);
+            const checksum = generateRandomString(8);
+            
+            const fullKey = `COSMIC-${keyPart}-${timestamp}-${checksum}`;
+            
+            // Hiển thị kết quả
+            document.getElementById('keyText').textContent = fullKey;
+            document.getElementById('resultBox').classList.add('show');
+            
+            // Lưu vào lịch sử
+            saveToHistory(fullKey, duration, quota);
+        }
 
+        // Sao chép khóa
         function copyKey() {
-            const key = document.getElementById('keyOutput').textContent;
-            navigator.clipboard.writeText(key).then(() => {
-                alert('Đã sao chép khóa:\n' + key);
+            const keyText = document.getElementById('keyText').textContent;
+            navigator.clipboard.writeText(keyText).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Đã Sao Chép!';
+                setTimeout(() => btn.textContent = 'Sao Chép', 2000);
             });
         }
+
+        // Lịch sử tạo khóa
+        let keyHistory = JSON.parse(localStorage.getItem('cosmicKeyHistory') || '[]');
+        
+        function saveToHistory(key, duration, quota) {
+            const record = {
+                key,
+                duration,
+                quota,
+                createdAt: new Date().toLocaleString('vi-VN')
+            };
+            keyHistory.unshift(record);
+            if (keyHistory.length > 10) keyHistory.pop();
+            localStorage.setItem('cosmicKeyHistory', JSON.stringify(keyHistory));
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (keyHistory.length === 0) return;
+            document.getElementById('historySection').style.display = 'block';
+            const list = document.getElementById('historyList');
+            list.innerHTML = keyHistory.map(item => `
+                <div class="history-item">
+                    <div class="history-key">${item.key}</div>
+                    <div class="history-meta">
+                        Hạn: ${item.duration} • Giới hạn: ${item.quota === 'unlimited' ? 'Không' : item.quota} lượt • ${item.createdAt}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Khởi tạo hiển thị lịch sử khi tải trang
+        renderHistory();
     </script>
 </body>
 </html>
