@@ -194,21 +194,6 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 40px rgba(99, 102, 241, 0.45);
         }
-        .btn-secondary {
-            padding: 15px 36px;
-            border: 1px solid rgba(167, 139, 250, 0.4);
-            color: #c4b5fd;
-            border-radius: 14px;
-            text-decoration: none;
-            background: rgba(167, 139, 250, 0.04);
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            border-color: #a78bfa;
-            background: rgba(167, 139, 250, 0.1);
-            color: #e5deff;
-            box-shadow: 0 0 20px rgba(167, 139, 250, 0.15);
-        }
 
         /* Card tính năng */
         .card-glow {
@@ -240,6 +225,7 @@
         .feat-icon {
             font-size: 20px;
             filter: drop-shadow(0 0 4px currentColor);
+            flex-shrink: 0;
         }
         .feat-text strong {
             display: block;
@@ -287,7 +273,7 @@
                     </p>
                     <div class="hero-buttons">
                         <a href="#" class="btn-primary">🚀 Khám Phá Ngay</a>
-                        <a href="#" class="btn-secondary">⚙️ Bảng Điều Khiển</a>
+                        <!-- ĐÃ BỎ NÚT BẢNG ĐIỀU KHIỂN Ở ĐÂY -->
                     </div>
                 </div>
                 <div class="card-glow">
@@ -300,7 +286,6 @@
                         </div>
                     </div>
                     <div class="feat-item">
-                        <div class="feat-item">
                         <span class="feat-icon">🔐</span>
                         <div class="feat-text">
                             <strong>Mã Hóa Đa Chiều</strong>
@@ -343,7 +328,6 @@
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
             star.style.setProperty('--op', Math.random() * 0.5 + 0.2);
-            star.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
             star.style.setProperty('--dur', (Math.random() * 3 + 2) + 's');
             container.appendChild(star);
         }
