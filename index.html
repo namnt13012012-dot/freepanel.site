@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureFlow — Tải & Quản Lý Khóa</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        :root {
+            --bg: #020617;
+            --surface: #111827;
+            --card: #1f2937;
+            --accent: #facc15;
+            --accent-2: #22c55e;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: rgba(250, 204, 21, 0.15);
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 15% 20%, rgba(34, 197, 94, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(250, 204, 21, 0.08) 0%, transparent 40%);
+        }
+        /* ====== HEADER — Bố cục khác hẳn ====== */
+        header {
+            padding: 30px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .header-inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .logo-mark {
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: grid; place-items: center;
+            font-size: 22px;
+            color: #000;
+            font-weight: bold;
+        }
+        .logo-text h2 { font-size: 18px; letter-spacing: 1px; }
+        .logo-text p { font-size: 11px; color: var(--muted); }
+        /* Menu dọc trên desktop, gọn trên mobile — khác hẳn */
+        .nav-wrap { display: flex; gap: 12px; align-items: center; }
+        .nav-link {
+            padding: 10px 20px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .nav-normal {
+            color: var(--muted);
+            border: 1px solid transparent;
+        }
+        .nav-normal:hover {
+            border-color: var(--border);
+            color: var(--accent);
+            background: rgba(250, 204, 21, 0.04);
+        }
+        .nav-admin {
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(250, 204, 21, 0.2);
+        }
+        .nav-admin:hover { transform: scale(1.05); }
+
+        /* ====== MAIN — Bố cục khối lớn, khác cấu trúc ====== */
+        main {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        @media (max-width: 768px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+        }
+        .hero-content h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+        .hero-content h1 span {
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-content p {
+            color: var(--muted);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+        .hero-buttons {
+            display: flex; gap: 14px; flex-wrap: wrap;
+        }
+        .btn-primary {
+            padding: 14px 32px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            color: #000;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.25);
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover { transform: translateY(-3px); }
+        .btn-secondary {
+            padding: 14px 32px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text);
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--accent); }
+
+        /* Khối bên phải */
+        .hero-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+        .hero-card h3 { font-size: 16px; margin-bottom: 20px; color: var(--accent); }
+        .feature-list { list-style: none; }
+        .feature-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex; gap: 10px; align-items: center;
+        }
+        .feature-list li:last-child { border-bottom: none; }
+        .feature-list li span:first-child { font-size: 18px; }
+        .feature-list li span:last-child { color: var(--muted); font-size: 14px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <div class="logo-wrap">
+                <div class="logo-mark">⚡</div>
+                <div class="logo-text">
+                    <h2>SecureFlow</h2>
+                    <p>FAST • SECURE • RELIABLE</p>
+                </div>
+            </div>
+            <nav class="nav-wrap">
+                <a href="#" class="nav-normal">📂 Tệp Dữ Liệu</a>
+                <a href="#" class="nav-normal">🔑 Lấy Mã Khóa</a>
+                <a href="#" class="nav-normal">🔗 Liên Kết</a>
+                <a href="#" class="nav-normal">🛡️ An Ninh</a>
+                <a href="admin.html" class="nav-admin">Bảng Quản Trị</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Tải Tài Nguyên &<br>Nhận <span>Khóa Bảo Mật</span></h1>
+                <p>Không rút gọn link, không chờ đợi. Tải trực tiếp mọi tệp, script, công cụ. Khi cần mã kích hoạt — hệ thống tạo key an toàn, chống mọi công cụ bỏ qua xác thực.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn-primary">Tải Ngay</a>
+                    <a href="admin.html" class="btn-secondary">Vào Quản Trị</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <h3>✅ Điểm Nổi Bật</h3>
+                <ul class="feature-list">
+                    <li><span>🚀</span><span>Tốc độ cao — không giới hạn băng thông</span></li>
+                    <li><span>🔐</span><span>Mã hóa HMAC-SHA256 chống giả mạo</span></li>
+                    <li><span>⏰</span><span>Tự động khóa khi hết thời hạn</span></li>
+                    <li><span>📊</span><span>Theo dõi lượt sử dụng chi tiết</span></li>
+                    <li><span>🛡️</span><span>Chống bot & tool bypass tự động</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
