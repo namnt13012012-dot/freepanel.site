@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CosmicKey — Tải Tài Nguyên Vũ Trụ</title>
+    <title>Cosmic Panel — Tải Panel & Khóa Kích Hoạt</title>
     <style>
         * {
             margin: 0;
@@ -22,10 +22,11 @@
         /* ===== Nền Sao & Mây Thiên Hà ===== */
         .stars {
             position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
-            z-index: 0;
         }
         .star {
             position: absolute;
@@ -43,30 +44,36 @@
             filter: blur(120px);
             opacity: 0.22;
             pointer-events: none;
-            z-index: 0;
         }
         .nebula-1 {
-            top: -150px; right: -80px;
-            width: 600px; height: 600px;
+            top: -150px;
+            right: -80px;
+            width: 600px;
+            height: 600px;
             background: radial-gradient(circle, #8b5cf6, transparent 70%);
             animation: float1 25s ease-in-out infinite;
         }
         .nebula-2 {
-            bottom: -120px; left: -60px;
-            width: 500px; height: 500px;
+            bottom: -120px;
+            left: -60px;
+            width: 500px;
+            height: 500px;
             background: radial-gradient(circle, #ec4899, transparent 70%);
             animation: float2 30s ease-in-out infinite;
         }
         @keyframes float1 {
-            0%,100% { transform: translate(0,0); }
+            0%, 100% { transform: translate(0, 0); }
             50% { transform: translate(-50px, 70px); }
         }
         @keyframes float2 {
-            0%,100% { transform: translate(0,0); }
+            0%, 100% { transform: translate(0, 0); }
             50% { transform: translate(60px, -50px); }
         }
 
-        .page { position: relative; z-index: 1; }
+        .page {
+            position: relative;
+            z-index: 1;
+        }
 
         /* ===== Header ===== */
         header {
@@ -85,10 +92,12 @@
             gap: 12px;
         }
         .logo-icon {
-            width: 42px; height: 42px;
+            width: 42px;
+            height: 42px;
             border-radius: 12px;
             background: linear-gradient(135deg, #8b5cf6, #ec4899);
-            display: grid; place-items: center;
+            display: grid;
+            place-items: center;
             font-size: 20px;
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
         }
@@ -102,147 +111,35 @@
             font-size: 10px;
             color: #94a3b8;
         }
-        nav { display: flex; gap: 10px; flex-wrap: wrap; }
-        .nav-link {
+        nav {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nav-link:link,
+        .nav-link:visited {
             padding: 10px 18px;
             border-radius: 12px;
             text-decoration: none;
             font-size: 14px;
             font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        .nav-normal {
             color: #c7d2fe;
             border: 1px solid transparent;
             background: rgba(129, 140, 248, 0.05);
+            transition: all 0.3s ease;
         }
-        .nav-normal:hover {
+        .nav-link:hover {
             border-color: rgba(129, 140, 248, 0.4);
             background: rgba(129, 140, 248, 0.12);
             color: #e0e7ff;
             box-shadow: 0 0 15px rgba(129, 140, 248, 0.2);
-        }
-        .nav-admin {
-            background: linear-gradient(135deg, #ec4899, #f59e0b);
-            color: white;
-            font-weight: 600;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.3);
-        }
-        .nav-admin:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(236, 72, 153, 0.4), 0 0 60px rgba(245, 158, 11, 0.2);
-        }
-
-        /* ===== QUẢ CẦU VŨ TRỤ 3D XOAY ĐỘNG ===== */
-        .planet-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 20px 20px;
-            position: relative;
-        }
-        .planet-wrapper {
-            position: relative;
-            width: 320px;
-            height: 320px;
-        }
-        /* Vòng sáng bên ngoài */
-        .planet-glow-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 360px; height: 360px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                transparent,
-                rgba(139, 92, 246, 0.4),
-                transparent,
-                rgba(236, 72, 153, 0.4),
-                transparent
-            );
-            animation: rotateRing 15s linear infinite;
-            filter: blur(4px);
-        }
-        @keyframes rotateRing {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-        /* Vòng thứ 2 */
-        .planet-glow-ring-2 {
-            width: 400px; height: 400px;
-            animation-duration: 20s;
-            animation-direction: reverse;
-            opacity: 0.5;
-        }
-        /* Quả cầu chính */
-        .planet {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 280px; height: 280px;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            background: 
-                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%),
-                radial-gradient(circle at 70% 60%, #3b0764, #1e1b4b, #0f172a);
-            box-shadow: 
-                0 0 60px rgba(139, 92, 246, 0.5),
-                0 0 100px rgba(236, 72, 153, 0.25),
-                inset -30px -30px 60px rgba(0,0,0,0.6),
-                inset 20px 20px 50px rgba(167, 139, 250, 0.2);
-            overflow: hidden;
-        }
-        /* Bề mặt quả cầu xoay */
-        .planet-surface {
-            position: absolute;
-            width: 200%; height: 100%;
-            background: 
-                radial-gradient(circle at 20% 40%, rgba(139, 92, 246, 0.4) 0%, transparent 25%),
-                radial-gradient(circle at 60% 70%, rgba(236, 72, 153, 0.35) 0%, transparent 20%),
-                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 18%),
-                radial-gradient(circle at 40% 85%, rgba(16, 185, 129, 0.25) 0%, transparent 22%);
-            animation: rotateSurface 30s linear infinite;
-        }
-        @keyframes rotateSurface {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
-        /* Vành đai quanh hành tinh */
-        .planet-ring {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 420px; height: 12px;
-            transform: translate(-50%, -50%) rotateX(75deg);
-            border-radius: 50%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(139, 92, 246, 0.6), 
-                rgba(236, 72, 153, 0.5), 
-                rgba(245, 158, 11, 0.4), 
-                transparent
-            );
-            filter: blur(2px);
-            animation: ringOrbit 25s linear infinite;
-        }
-        @keyframes ringOrbit {
-            from { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
-            to { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
-        }
-        /* Hạt bụi sao bay quanh */
-        .orbit-particle {
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 6px; height: 6px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
 
         /* ===== Nội Dung Chính ===== */
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 24px 60px;
+            padding: 60px 24px;
         }
         .hero {
             display: grid;
@@ -251,7 +148,10 @@
             align-items: center;
         }
         @media (max-width: 868px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
         .hero-content h1 {
             font-size: clamp(2.4rem, 5vw, 3.6rem);
@@ -275,7 +175,9 @@
             margin-bottom: 36px;
         }
         .hero-buttons {
-            display: flex; gap: 16px; flex-wrap: wrap;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
         }
         .btn-primary {
             padding: 15px 36px;
@@ -320,14 +222,20 @@
             font-size: 18px;
             margin-bottom: 24px;
             color: #a5b4fc;
-            display: flex; align-items: center; gap: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .feat-item {
-            display: flex; align-items: flex-start; gap: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
             padding: 14px 0;
             border-bottom: 1px solid rgba(100, 116, 139, 0.15);
         }
-        .feat-item:last-child { border-bottom: none; }
+        .feat-item:last-child {
+            border-bottom: none;
+        }
         .feat-icon {
             font-size: 20px;
             filter: drop-shadow(0 0 4px currentColor);
@@ -355,36 +263,23 @@
             <div class="logo">
                 <div class="logo-icon">🌌</div>
                 <div class="logo-text">
-                    <h3>CosmicKey</h3>
+                    <h3>Cosmic Panel</h3>
                     <p>INFINITE • SECURE • COSMIC</p>
                 </div>
             </div>
             <nav>
-                <a href="#" class="nav-link nav-normal">📂 Kho Tài Nguyên</a>
-                <a href="#" class="nav-link nav-normal">🔑 Nhận Khóa</a>
-                <a href="#" class="nav-link nav-normal">🔗 Liên Kết An Toàn</a>
-                <a href="#" class="nav-link nav-normal">🛡️ Hệ Thống Bảo Vệ</a>
-                <a href="admin.html" class="nav-link nav-admin">✨ Bảng Quản Trị</a>
+                <a href="#" class="nav-link">📂 Kho Tài Nguyên</a>
+                <a href="#" class="nav-link">🔑 Nhận Khóa</a>
+                <a href="#" class="nav-link">🔗 Liên Kết An Toàn</a>
+                <a href="#" class="nav-link">🛡️ Hệ Thống Bảo Vệ</a>
             </nav>
         </header>
-
-        <!-- ===== QUẢ CẦU VŨ TRỤ Ở TRÊN ===== -->
-        <section class="planet-container">
-            <div class="planet-wrapper">
-                <div class="planet-glow-ring"></div>
-                <div class="planet-glow-ring planet-glow-ring-2"></div>
-                <div class="planet-ring"></div>
-                <div class="planet">
-                    <div class="planet-surface"></div>
-                </div>
-            </div>
-        </section>
 
         <main>
             <section class="hero">
                 <div class="hero-content">
                     <h1>
-                        <span>Tải Tài Nguyên Vũ Trụ</span><br>
+                        <span>Tải Panel</span><br>
                         <span>& Khóa Kích Hoạt</span>
                     </h1>
                     <p class="hero-desc">
@@ -421,6 +316,8 @@
                     <div class="feat-item">
                         <span class="feat-icon">🌟</span>
                         <div class="feat-text">
+                            <strong>Theo Dõi Thời Gian Thực</strong>
+                            <div class="feat-text">
                             <strong>Theo Dõi Thời Gian Thực</strong>
                             <span>Giám sát từng lượt truy cập chi tiết</span>
                         </div>
