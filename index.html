@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CosmicKey — Hệ Thống Khóa Vũ Trụ</title>
+    <title>CosmicKey — Tải Tài Nguyên Vũ Trụ</title>
     <style>
         * {
             margin: 0;
@@ -14,18 +14,16 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #020617 0%, #0c1233 40%, #1a1040 70%, #081535 100%);
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
             overflow-x: hidden;
-            color: #e6f0ff;
+            color: #e0e7ff;
         }
 
-        /* ===== Nền Sao Chuyển Động ===== */
+        /* ===== Nền Sao & Mây Thiên Hà ===== */
         .stars {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             pointer-events: none;
             z-index: 0;
         }
@@ -36,108 +34,77 @@
             animation: twinkle var(--dur) ease-in-out infinite;
         }
         @keyframes twinkle {
-            0%, 100% { opacity: var(--op); transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.3); }
+            0%, 100% { opacity: var(--op); }
+            50% { opacity: 1; }
         }
         .nebula {
             position: fixed;
-            width: 600px;
-            height: 600px;
             border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.25;
+            filter: blur(120px);
+            opacity: 0.22;
             pointer-events: none;
             z-index: 0;
         }
         .nebula-1 {
-            top: -200px;
-            right: -100px;
-            background: radial-gradient(circle, #6366f1, transparent 70%);
-            animation: float1 20s ease-in-out infinite;
+            top: -150px; right: -80px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, #8b5cf6, transparent 70%);
+            animation: float1 25s ease-in-out infinite;
         }
         .nebula-2 {
-            bottom: -150px;
-            left: -100px;
+            bottom: -120px; left: -60px;
+            width: 500px; height: 500px;
             background: radial-gradient(circle, #ec4899, transparent 70%);
-            animation: float2 25s ease-in-out infinite;
-        }
-        .nebula-3 {
-            top: 40%;
-            left: 30%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #10b981, transparent 70%);
-            animation: float3 30s ease-in-out infinite;
+            animation: float2 30s ease-in-out infinite;
         }
         @keyframes float1 {
             0%,100% { transform: translate(0,0); }
-            50% { transform: translate(-40px, 60px); }
+            50% { transform: translate(-50px, 70px); }
         }
         @keyframes float2 {
             0%,100% { transform: translate(0,0); }
-            50% { transform: translate(50px, -40px); }
-        }
-        @keyframes float3 {
-            0%,100% { transform: translate(0,0) scale(1); }
-            50% { transform: translate(30px, -30px) scale(1.15); }
+            50% { transform: translate(60px, -50px); }
         }
 
-        /* ===== Container ===== */
-        .page-wrap {
-            position: relative;
-            z-index: 1;
-        }
+        .page { position: relative; z-index: 1; }
 
         /* ===== Header ===== */
         header {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 28px 24px;
+            padding: 24px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(148, 163, 255, 0.12);
+            border-bottom: 1px solid rgba(129, 140, 248, 0.15);
             backdrop-filter: blur(10px);
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #6366f1, #ec4899, #f59e0b);
-            display: grid;
-            place-items: center;
-            font-size: 24px;
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.45), 0 0 50px rgba(236, 72, 153, 0.2);
-            animation: glow 3s ease-in-out infinite alternate;
-        }
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), 0 0 40px rgba(236, 72, 153, 0.15); }
-            to { box-shadow: 0 0 30px rgba(99, 102, 241, 0.6), 0 0 60px rgba(236, 72, 153, 0.3); }
-        }
-        .logo-text h2 {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            display: grid; place-items: center;
             font-size: 20px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+        .logo-text h3 {
+            font-size: 16px;
             background: linear-gradient(90deg, #a5b4fc, #f472b6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
         }
         .logo-text p {
-            font-size: 11px;
+            font-size: 10px;
             color: #94a3b8;
-            letter-spacing: 2px;
         }
-        nav {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        nav { display: flex; gap: 10px; flex-wrap: wrap; }
         .nav-link {
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 12px;
             text-decoration: none;
             font-size: 14px;
@@ -147,13 +114,13 @@
         .nav-normal {
             color: #c7d2fe;
             border: 1px solid transparent;
-            background: rgba(99, 102, 241, 0.05);
+            background: rgba(129, 140, 248, 0.05);
         }
         .nav-normal:hover {
-            border-color: rgba(99, 102, 241, 0.4);
-            background: rgba(99, 102, 241, 0.12);
+            border-color: rgba(129, 140, 248, 0.4);
+            background: rgba(129, 140, 248, 0.12);
             color: #e0e7ff;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 0 15px rgba(129, 140, 248, 0.2);
         }
         .nav-admin {
             background: linear-gradient(135deg, #ec4899, #f59e0b);
@@ -166,11 +133,116 @@
             box-shadow: 0 0 30px rgba(236, 72, 153, 0.4), 0 0 60px rgba(245, 158, 11, 0.2);
         }
 
-        /* ===== Main Hero ===== */
+        /* ===== QUẢ CẦU VŨ TRỤ 3D XOAY ĐỘNG ===== */
+        .planet-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+        .planet-wrapper {
+            position: relative;
+            width: 320px;
+            height: 320px;
+        }
+        /* Vòng sáng bên ngoài */
+        .planet-glow-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 360px; height: 360px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(139, 92, 246, 0.4),
+                transparent,
+                rgba(236, 72, 153, 0.4),
+                transparent
+            );
+            animation: rotateRing 15s linear infinite;
+            filter: blur(4px);
+        }
+        @keyframes rotateRing {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        /* Vòng thứ 2 */
+        .planet-glow-ring-2 {
+            width: 400px; height: 400px;
+            animation-duration: 20s;
+            animation-direction: reverse;
+            opacity: 0.5;
+        }
+        /* Quả cầu chính */
+        .planet {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 280px; height: 280px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 50%),
+                radial-gradient(circle at 70% 60%, #3b0764, #1e1b4b, #0f172a);
+            box-shadow: 
+                0 0 60px rgba(139, 92, 246, 0.5),
+                0 0 100px rgba(236, 72, 153, 0.25),
+                inset -30px -30px 60px rgba(0,0,0,0.6),
+                inset 20px 20px 50px rgba(167, 139, 250, 0.2);
+            overflow: hidden;
+        }
+        /* Bề mặt quả cầu xoay */
+        .planet-surface {
+            position: absolute;
+            width: 200%; height: 100%;
+            background: 
+                radial-gradient(circle at 20% 40%, rgba(139, 92, 246, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 60% 70%, rgba(236, 72, 153, 0.35) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(59, 130, 246, 0.3) 0%, transparent 18%),
+                radial-gradient(circle at 40% 85%, rgba(16, 185, 129, 0.25) 0%, transparent 22%);
+            animation: rotateSurface 30s linear infinite;
+        }
+        @keyframes rotateSurface {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        /* Vành đai quanh hành tinh */
+        .planet-ring {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 420px; height: 12px;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            border-radius: 50%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(139, 92, 246, 0.6), 
+                rgba(236, 72, 153, 0.5), 
+                rgba(245, 158, 11, 0.4), 
+                transparent
+            );
+            filter: blur(2px);
+            animation: ringOrbit 25s linear infinite;
+        }
+        @keyframes ringOrbit {
+            from { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
+        }
+        /* Hạt bụi sao bay quanh */
+        .orbit-particle {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 6px; height: 6px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
+        }
+
+        /* ===== Nội Dung Chính ===== */
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 70px 24px;
+            padding: 20px 24px 60px;
         }
         .hero {
             display: grid;
@@ -182,8 +254,8 @@
             .hero { grid-template-columns: 1fr; text-align: center; }
         }
         .hero-content h1 {
-            font-size: clamp(2.4rem, 5vw, 3.8rem);
-            line-height: 1.2;
+            font-size: clamp(2.4rem, 5vw, 3.6rem);
+            line-height: 1.25;
             margin-bottom: 24px;
         }
         .hero-content h1 span:nth-child(1) {
@@ -203,9 +275,7 @@
             margin-bottom: 36px;
         }
         .hero-buttons {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
+            display: flex; gap: 16px; flex-wrap: wrap;
         }
         .btn-primary {
             padding: 15px 36px;
@@ -237,27 +307,23 @@
             box-shadow: 0 0 20px rgba(167, 139, 250, 0.15);
         }
 
-        /* ===== Feature Card ===== */
+        /* ===== Card Tính Năng ===== */
         .card-glow {
-            background: rgba(15, 23, 42, 0.7);
+            background: rgba(15, 23, 42, 0.75);
             border-radius: 20px;
             padding: 36px;
             border: 1px solid rgba(129, 140, 248, 0.2);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 0 40px rgba(99, 102, 241, 0.1), inset 0 0 40px rgba(99, 102, 241, 0.05);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 50px rgba(99, 102, 241, 0.1), inset 0 0 50px rgba(99, 102, 241, 0.05);
         }
         .card-title {
             font-size: 18px;
             margin-bottom: 24px;
             color: #a5b4fc;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 10px;
         }
         .feat-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            display: flex; align-items: flex-start; gap: 12px;
             padding: 14px 0;
             border-bottom: 1px solid rgba(100, 116, 139, 0.15);
         }
@@ -279,18 +345,17 @@
     </style>
 </head>
 <body>
-    <!-- Nền Sao & Thiên Hà -->
+    <!-- Nền sao & mây thiên hà -->
     <div class="stars" id="starsContainer"></div>
     <div class="nebula nebula-1"></div>
     <div class="nebula nebula-2"></div>
-    <div class="nebula nebula-3"></div>
 
-    <div class="page-wrap">
+    <div class="page">
         <header>
             <div class="logo">
                 <div class="logo-icon">🌌</div>
                 <div class="logo-text">
-                    <h2>CosmicKey</h2>
+                    <h3>CosmicKey</h3>
                     <p>INFINITE • SECURE • COSMIC</p>
                 </div>
             </div>
@@ -302,6 +367,18 @@
                 <a href="admin.html" class="nav-link nav-admin">✨ Bảng Quản Trị</a>
             </nav>
         </header>
+
+        <!-- ===== QUẢ CẦU VŨ TRỤ Ở TRÊN ===== -->
+        <section class="planet-container">
+            <div class="planet-wrapper">
+                <div class="planet-glow-ring"></div>
+                <div class="planet-glow-ring planet-glow-ring-2"></div>
+                <div class="planet-ring"></div>
+                <div class="planet">
+                    <div class="planet-surface"></div>
+                </div>
+            </div>
+        </section>
 
         <main>
             <section class="hero">
@@ -360,14 +437,14 @@
         </main>
     </div>
 
-    <!-- Tạo sao động -->
+    <!-- Tạo sao lấp lánh -->
     <script>
         const container = document.getElementById('starsContainer');
         for (let i = 0; i < 200; i++) {
             const star = document.createElement('div');
             star.className = 'star';
-            const size = Math.random() * 2.5 + 0.5;
-            star.style.width = star.style.height = size + 'px';
+            const s = Math.random() * 2.5 + 0.5;
+            star.style.width = star.style.height = s + 'px';
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
             star.style.setProperty('--op', Math.random() * 0.5 + 0.2);
